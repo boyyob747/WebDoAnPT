@@ -1,0 +1,83 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <b><h3>Thêm người dùng</h3></b>
+                    </div>
+                    <div class="card-body">
+                        
+                        <form (ngSubmit)="onAddUser()">
+                            <div class="row">
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="UserID" name="UserID" matInput placeholder="ID" [value]="lastID" disabled type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="name" name="name" matInput placeholder="Họ và tên" required type="text">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="username" name="username" matInput placeholder="Username" required type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field>
+                                        <input matInput [(ngModel)]="NgaySinh" name="NgaySinh" required [matDatepicker]="picker" placeholder="Ngày sinh">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                    <mat-select [(ngModel)]="MaChucVu" name="MaChucVu" class="example-full-width">
+                                        <mat-option  *ngFor="let chucvu of chucvus" [value]="chucvu.MaCV">
+                                          {{ chucvu.TenCV }}
+                                        </mat-option>
+                                      </mat-select>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="email" name="email" placeholder="Email" required type="text">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="SoDienThoai" name="SoDienThoai" placeholder="Số điện thoại" required type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="password" name="password" placeholder="Mặt khâu" required type="password">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <mat-form-field class="example-full-width">
+                                      <textarea matInput [(ngModel)]="DiaChi" name="DiaChi" placeholder="Địa chỉ" type="text"></textarea>
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <br>
+                            <button mat-raised-button type="submit" class="btn btn-info pull-right">Thêm</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,55 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h3 class="card-title ">Danh sách User</h3>
+                    </div>
+                    <div class="card-body">
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Tìm kiểm danh sách người dùng">
+                          </mat-form-field>
+                          <mat-table  [dataSource]="dataSource">
+                              <ng-container matColumnDef="MaTruong">
+                                  <mat-header-cell *matHeaderCellDef>Mã trường</mat-header-cell>
+                                    <mat-cell *matCellDef="let truong">{{truong.idTruong}}</mat-cell>
+                              </ng-container>
+                              <ng-container matColumnDef="TenTruong">
+                                  <mat-header-cell *matHeaderCellDef>Tên trường</mat-header-cell>
+                                  <mat-cell *matCellDef="let truong">{{truong.TenTruong}}</mat-cell>
+                              </ng-container>
+                              <ng-container matColumnDef="Logo">
+                                  <mat-header-cell *matHeaderCellDef>Logo</mat-header-cell>
+                                  <mat-cell *matCellDef="let truong">{{truong.Logo}}</mat-cell>
+                              </ng-container>
+                              <ng-container matColumnDef="NamThanhLap">
+                                  <mat-header-cell *matHeaderCellDef>Năm thành lập</mat-header-cell>
+                                  <mat-cell *matCellDef="let truong">{{truong.NamThanhLap}}</mat-cell>
+                              </ng-container>
+                              <ng-container matColumnDef="DiaChi">
+                                  <mat-header-cell *matHeaderCellDef>Địa chỉ</mat-header-cell>
+                                  <mat-cell *matCellDef="let truong">{{truong.DiaChi}}</mat-cell>
+                              </ng-container>
+                  
+                              <ng-container matColumnDef="thaotac">
+                                  <mat-header-cell *matHeaderCellDef>Thao tác</mat-header-cell>
+                                  <mat-cell *matCellDef="let truong"><a class="btn btn-success" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></mat-cell>
+                              </ng-container>
+                              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                              
+                              <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                              
+                          </mat-table>
+                          <mat-paginator #paginator
+                          [pageSize]="10"
+                          [pageSizeOptions]="[5, 10, 20]"
+                          [showFirstLastButtons]="true">
+                          </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

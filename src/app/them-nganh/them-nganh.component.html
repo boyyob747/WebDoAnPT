@@ -1,0 +1,42 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                      <b><h3>Thêm ngành học</h3></b>
+                  </div>
+                  <div class="card-body">
+                      
+                      <form (ngSubmit)="onThemNganh()">
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input [(ngModel)]="MaNH" name="MaNH" required matInput placeholder="Mã ngành" type="text">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input [(ngModel)]="TenNH" name="TenNH" matInput placeholder="Tên ngành học" required type="text">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                    <textarea matInput [(ngModel)]="MoTa" name="MoTa" placeholder="Mô tả:" type="text"></textarea>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <br>
+                          <button mat-raised-button type="submit" class="btn btn-info pull-right">Thêm</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

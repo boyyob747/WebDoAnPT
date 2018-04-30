@@ -1,0 +1,95 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                      <b><h3>Thêm mới Trường đại học, cao đẳng</h3></b>
+                  </div>
+                  <div class="card-body">
+                      
+                      <form (ngSubmit)="onAddUser()">
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input [(ngModel)]="idTruong" name="idTruong" matInput placeholder="Mã trường" type="text">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input [(ngModel)]="TenTruong" name="TenTruong" matInput placeholder="Tên trường" required type="text">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <mat-form-field>
+                                      <input matInput [(ngModel)]="NamThanhLap" name="NamThanhLap" required [matDatepicker]="picker" placeholder="Năm thành lập">
+                                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                      <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                               
+                              </div>
+                              <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                      <input [(ngModel)]="DiaChi" name="DiaChi" matInput placeholder="Địa chỉ" required type="text">
+                                    </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                    <mat-form-field>
+                                            <mat-select required placeholder="Danh sách ngành" multiple>
+                                              <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
+                                            </mat-select>
+                                    </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput [(ngModel)]="Logo" name="Logo" placeholder="Logo" required type="text">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput [(ngModel)]="HieuTruong" name="HieuTruong" placeholder="Hiệu trưởng" required type="text">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput [(ngModel)]="DienThoai" name="DienThoai" placeholder="Điện thoại" required type="text">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                    <textarea matInput [(ngModel)]="TamNhin" name="TamNhin" placeholder="Tầm nhìn" type="text"></textarea>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                    <textarea matInput [(ngModel)]="SuMang" name="SuMang" placeholder="Sứ mệnh" type="text"></textarea>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                    <textarea matInput [(ngModel)]="GioiThieu" name="GioiThieu" placeholder="Giới thiệu" type="text"></textarea>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <br>
+                          <button mat-raised-button type="submit" class="btn btn-info pull-right">Thêm</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                      <h3 class="card-title ">Danh sách User</h3>
+                  </div>
+                  <div class="card-body">
+                      <mat-form-field>
+                          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Tìm kiểm danh sách người dùng">
+                        </mat-form-field>
+                        <mat-table  [dataSource]="dataSource">
+                            <ng-container matColumnDef="UserID">
+                                <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+                                  <mat-cell *matCellDef="let user">{{user.UserID}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="username">
+                                <mat-header-cell *matHeaderCellDef>Username</mat-header-cell>
+                                <mat-cell *matCellDef="let user">{{user.username}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="email">
+                                <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+                                <mat-cell *matCellDef="let user">{{user.email}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="NgaySinh">
+                                <mat-header-cell *matHeaderCellDef>Ngày sinh</mat-header-cell>
+                                <mat-cell *matCellDef="let user">{{user.NgaySinh}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="GioiTinh">
+                                <mat-header-cell *matHeaderCellDef>Giới tính</mat-header-cell>
+                                <mat-cell *matCellDef="let user">
+                                  <label *ngIf="user.GioiTinh==1">Nam</label>
+                                  <label *ngIf="user.GioiTinh==0">Nữ</label>
+                                </mat-cell>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="TrangThai">
+                                <mat-header-cell *matHeaderCellDef>Khóa/Kích hoạt</mat-header-cell>
+                                <mat-cell *matCellDef="let user">
+                                        <swal
+                                        #kichhoat
+                                        title="Khóa tài khoàn người dùng "
+                                        text="Bạn có muốn kích hoạt {{user.username}} không ?" 
+                                        type="warning"
+                                        [showCancelButton]="true"
+                                        (confirm)="onClickLogout()">
+                                        </swal>
+                                    <a [swal]="kichhoat"  href="" *ngIf="user.TrangThai==1">Kích hoạt</a>
+                                    <a [swal]="kichhoat"  href="" *ngIf="user.TrangThai==0">Khóa</a>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="thaotac">
+                                <mat-header-cell *matHeaderCellDef>Xem</mat-header-cell>
+                                <mat-cell *matCellDef="let user"><a class="btn btn-success" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></mat-cell>
+                            </ng-container>
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            
+                            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                            
+                        </mat-table>
+                        <mat-paginator #paginator
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 20]"
+                        [showFirstLastButtons]="true">
+                        </mat-paginator>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
