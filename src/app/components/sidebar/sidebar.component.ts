@@ -33,7 +33,7 @@ export const ROUTES: RouteInfo[] = [
         {path : '/dssv',title : 'Danh sách sinh viên'},
         {path : '/themsv',title : 'Thêm sinh viên'},
         {
-            path : 'themdssv' , title : 'Thêm danh sách sinh viên'
+            path : '/themdssv' , title : 'Thêm danh sách sinh viên'
         }
     ] ,iconArrow : 'keyboard_arrow_down',showMenu : '0',maChucVu : '1'},
     { path: '', title: 'Quản lý trường ',  icon:'account_balance', class: 'qltruong' , 
@@ -46,10 +46,10 @@ export const ROUTES: RouteInfo[] = [
         {path : '/danhnganh',title : 'Danh ngành'},
         {path : '/themnganh',title : 'Thêm ngành'}
     ] ,iconArrow : 'keyboard_arrow_down',showMenu : '0',maChucVu : '1'},
+    //
+    { path: '/qllienhe', title: 'Quản lý liên hệ',  icon: 'link', class: 'qllienhe' , subMenu : null ,iconArrow : 'keyboard_arrow_down',showMenu : '0',maChucVu : '1'},
     { path: '/thongke', title: 'Thông kê',  icon: 'contact_mail', class: 'thongke' , subMenu : null ,iconArrow : 'keyboard_arrow_down',showMenu : '0',maChucVu : '1'},
     { path: '/baocao', title: 'Bao cáo',  icon: 'contact_mail', class: 'baocao' , subMenu : null ,iconArrow : 'keyboard_arrow_down',showMenu : '0',maChucVu : '1'},
-    
-
 ];
 
 @Component({
@@ -67,9 +67,11 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    
     if (localStorage.getItem("MaChucVu") != null){
         this.MaChucVu = localStorage.getItem("MaChucVu");
     }
+    console.log("this.MaChucVu = " + this.MaChucVu);
   }
   isMobileMenu() {
       if ($(window).width() > 991) {

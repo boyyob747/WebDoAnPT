@@ -31,8 +31,8 @@
                             <ng-container matColumnDef="GioiTinh">
                                 <mat-header-cell *matHeaderCellDef>Giới tính</mat-header-cell>
                                 <mat-cell *matCellDef="let user">
-                                  <label *ngIf="user.GioiTinh==1">Nam</label>
-                                  <label *ngIf="user.GioiTinh==0">Nữ</label>
+                                  <div *ngIf="user.GioiTinh==1">Nam</div>
+                                  <div *ngIf="user.GioiTinh==0">Nữ</div>
                                 </mat-cell>
                             </ng-container>
                             

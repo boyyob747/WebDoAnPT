@@ -1,0 +1,72 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title mt-0">Thống kê tình hình việc làm của sinh viên tốt nghiệp năm 2017</h4>
+                        <p class="card-category">Về khu vực làm việc của sinh viên sau tốt nghiệp</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>Id</th>
+                                  <th>Khu vực làm việc</th>
+                                  <th>Số lượng</th>
+                                  <th>Tỉ lệ</th>
+                              </thead>
+                              <tfoot>
+                                  <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th>3400</th>
+                                    <th>100</th>
+                                  </tr>
+                                </tfoot>
+                              <tbody>
+                                  <tr>
+                                      <td>1</td>
+                                      <td>Làm việc trong hệ thống hành chỉnh quản lý Nhà nước</td>
+                                      <td>1052</td>
+                                      <td>30.91</td>
+                                    </tr>
+                                    <tr>
+                                      <td>2</td>
+                                      <td>Làm việc tại các trường hoặc viện nghiên cứu</td>
+                                      <td>431</td>
+                                      <td>12.68</td>
+                                    </tr>
+                                    <tr>
+                                      <td>3</td>
+                                      <td>Làm việc trong công ty/doanh nghiệp/tổ chức cá nhân/Cty TNHH ..</td>
+                                      <td>1891</td>
+                                      <td>55.62</td>
+                                    </tr>
+                                    <tr>
+                                      <td>4</td>
+                                      <td>Tự tạo ra việc làm</td>
+                                      <td>26</td>
+                                      <td>0.79</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <canvas baseChart height="180px" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                                  </canvas>
+                            </div>
+                            <div class="col-md-6">
+                                <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                                  </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

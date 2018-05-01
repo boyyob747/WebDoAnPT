@@ -22,7 +22,11 @@ import { DsNganhComponent } from '../../ds-nganh/ds-nganh.component';
 import { ThemNganhComponent } from '../../them-nganh/them-nganh.component';
 import { ThongKeComponent } from '../../thong-ke/thong-ke.component';
 import { BaoCaoComponent } from '../../bao-cao/bao-cao.component';
-
+import { DsSinhvienComponent } from '../../ds-sinhvien/ds-sinhvien.component';
+import { DsLineHeComponent } from '../../ds-line-he/ds-line-he.component';
+import { TrangchuComponent } from '../../trangchu/trangchu.component';
+import { LienHeComponent } from '../../lien-he/lien-he.component';
+import { ThucHienKhaoSatComponent } from '../../thuc-hien-khao-sat/thuc-hien-khao-sat.component';
 export const AdminLayoutRoutes: Routes = [
     // {
     //   path: '',
@@ -66,7 +70,6 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'trangchu',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },
@@ -80,7 +83,7 @@ export const AdminLayoutRoutes: Routes = [
     { path : 'themuser' , component : ThemUserComponent},
     { path : 'phieukhaosat' , component : PhieukhaosatComponent},
     { path : 'ketquakhaosat' , component : KetQuaKhaoSatComponent},
-    { path : 'dssv' , component : DanhSachUsersComponent},
+    { path : 'dssv' , component : DsSinhvienComponent},
     { path : 'themsv' , component : ThemSinhvienComponent},
     { path : 'themdssv' , component : ThemDsSinhvienComponent},
     { path : 'danhtruong' , component : TruongComponent},
@@ -89,4 +92,8 @@ export const AdminLayoutRoutes: Routes = [
     { path : 'themnganh' , component : ThemNganhComponent},
     { path : 'thongke' , component : ThongKeComponent},
     { path : 'baocao' , component : BaoCaoComponent},
+    {path : 'qllienhe', component : DsLineHeComponent},
+    { path : 'trangchu' , component : TrangchuComponent},
+    { path : 'thuchienkhaosat' , component : ThucHienKhaoSatComponent},
+    {path : 'lienhe', component : LienHeComponent}
 ];

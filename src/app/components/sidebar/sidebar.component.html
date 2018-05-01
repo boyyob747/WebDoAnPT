@@ -56,15 +56,27 @@
   </div>
  
     <ul class="nav" *ngIf="MaChucVu==-1">
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-            <a class="nav-link" *ngIf="menuItem.subMenu == null" [routerLink]="[menuItem.path]">
-                <i class="material-icons">{{menuItem.icon}}</i>
-                <p>{{menuItem.title}}</p>
+        <li routerLinkActive="active" class="nav-item">
+            <a class="nav-link" routerLink="/trangchu">
+                <i class="material-icons">home</i>
+                <p>Trang chủ</p>
             </a>
         </li>
+        <li routerLinkActive="active" class="nav-item">
+                <a class="nav-link" routerLink="/thuchienkhaosat">
+                    <i class="material-icons">question_answer</i>
+                    <p>Thực hiện khảo sát</p>
+                </a>
+            </li>
+            <li routerLinkActive="active" class="nav-item">
+                    <a class="nav-link" routerLink="/lienhe">
+                        <i class="material-icons">contact_mail</i>
+                        <p>Liện hệ</p>
+                    </a>
+                </li>
     </ul>
 
-    <ul class="nav">
+    <ul class="nav" *ngIf="MaChucVu==1">
         <div *ngFor="let menuItem of menuItems ; index as i ;">
             <div *ngIf="menuItem.subMenu != null">
                     <li>

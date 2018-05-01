@@ -8,11 +8,11 @@
                   </div>
                   <div class="card-body">
                       
-                      <form (ngSubmit)="onAddUser()">
+                      <form (ngSubmit)="onAddTruong()">
                           <div class="row">
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input [(ngModel)]="idTruong" name="idTruong" matInput placeholder="Mã trường" type="text">
+                                  <input [(ngModel)]="idTruong" required name="idTruong" matInput placeholder="Mã trường" type="text">
                                 </mat-form-field>
                               </div>
                               <div class="col-md-6">
@@ -39,15 +39,15 @@
                           <div class="row">
                               <div class="col-md-6">
                                     <mat-form-field>
-                                            <mat-select required placeholder="Danh sách ngành" multiple>
+                                            <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Danh sách ngành" multiple>
                                               <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
                                             </mat-select>
                                     </mat-form-field>
                               </div>
                               <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput [(ngModel)]="Logo" name="Logo" placeholder="Logo" required type="text">
-                                </mat-form-field>
+                                  <br>
+                                    Logo : 
+                                    <input #file [(ngModel)]="Logo" name="Logo" type="file" accept="image/*">
                               </div>
                           </div>
                           <div class="row">

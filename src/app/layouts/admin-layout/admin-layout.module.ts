@@ -35,6 +35,10 @@ import { ThemNganhComponent } from '../../them-nganh/them-nganh.component';
 import { DsNganhComponent } from '../../ds-nganh/ds-nganh.component';
 import { ThongKeComponent } from '../../thong-ke/thong-ke.component';
 import { BaoCaoComponent } from '../../bao-cao/bao-cao.component';
+import { DsLineHeComponent } from '../../ds-line-he/ds-line-he.component';
+import { ThucHienKhaoSatComponent } from '../../thuc-hien-khao-sat/thuc-hien-khao-sat.component';
+import { LienHeComponent } from '../../lien-he/lien-he.component';
+import { TrangchuComponent } from '../../trangchu/trangchu.component';
 @NgModule({
   imports: [
     NbSidebarModule,
@@ -71,7 +75,8 @@ import { BaoCaoComponent } from '../../bao-cao/bao-cao.component';
     ThemNganhComponent,
     DsNganhComponent,
     ThongKeComponent,
-    BaoCaoComponent,
+    BaoCaoComponent,TrangchuComponent,
+    DsLineHeComponent,ThucHienKhaoSatComponent,LienHeComponent
   ]
 })
 

@@ -1,3 +1,64 @@
-<p>
-  ds-sinhvien works!
-</p>
+
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                      <h3 class="card-title ">Danh sách sinh viên</h3>
+                  </div>
+                  <div class="card-body">
+                      <mat-form-field>
+                          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Nhập vào tên sinh viên">
+                        </mat-form-field>
+                        <mat-table  [dataSource]="dataSource">
+                            <ng-container matColumnDef="MaSV">
+                                <mat-header-cell *matHeaderCellDef>MSSV</mat-header-cell>
+                                  <mat-cell *matCellDef="let sinhvien">{{sinhvien.MaSV}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="TenSV">
+                                <mat-header-cell *matHeaderCellDef>Họ tên</mat-header-cell>
+                                <mat-cell *matCellDef="let sinhvien">{{sinhvien.TenSV}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="TenNganh">
+                                <mat-header-cell *matHeaderCellDef>Ngành</mat-header-cell>
+                                <mat-cell *matCellDef="let sinhvien">{{sinhvien.TenNganh}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="TenTruong">
+                                <mat-header-cell *matHeaderCellDef>Trường</mat-header-cell>
+                                <mat-cell *matCellDef="let sinhvien">{{sinhvien.TenTruong}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="NgaySinh">
+                              <mat-header-cell *matHeaderCellDef>Ngày sinh</mat-header-cell>
+                              <mat-cell *matCellDef="let sinhvien">{{sinhvien.NgaySinh}}</mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="GioiTinh">
+                            <mat-header-cell *matHeaderCellDef>Giới tính</mat-header-cell>
+                            <mat-cell *matCellDef="let sinhvien">
+                              <div *ngIf="sinhvien.GioiTinh==1">Nam</div>
+                              <div *ngIf="sinhvien.GioiTinh==0">Nữ</div>
+                            </mat-cell>
+                        </ng-container>
+                           
+                            
+                      
+                            <ng-container matColumnDef="thaotac">
+                                <mat-header-cell *matHeaderCellDef>Thao tác</mat-header-cell>
+                                <mat-cell *matCellDef="let sinhvien"><a class="btn btn-success" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></mat-cell>
+                            </ng-container>
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            
+                            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                            
+                        </mat-table>
+                        <mat-paginator #paginator
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 20]"
+                        [showFirstLastButtons]="true">
+                        </mat-paginator>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

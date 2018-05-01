@@ -1,3 +1,34 @@
-<p>
-  them-ds-sinhvien works!
-</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <b><h3>Thêm danh sách sinh viên</h3></b>
+                    </div>
+                    <div class="card-body">
+                        
+                        <form (ngSubmit)="onAddTruong()">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <br>
+                                      <b>Chọn file chứa danh sách sinh viên đã tốt nghiệp : </b><br><br>
+                                      <input #file [(ngModel)]="Logo" name="Logo" type="file">
+                                      <br>
+                                      <br>
+                                      <p style="color: red;">Bắt buộc nhập File và File có chứa định dạng .xlsx</p>
+                                </div>
+                            </div>
+
+                            <br>
+                            <button mat-raised-button type="submit" class="btn btn-primary pull-right">Thêm</button>
+                            <button mat-raised-button type="submit" class="btn pull-right">Quay về</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

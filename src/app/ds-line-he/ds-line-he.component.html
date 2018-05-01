@@ -1,0 +1,51 @@
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h3 class="card-title ">Danh sách liên hệ</h3>
+                    </div>
+                    <div class="card-body">
+                        <mat-form-field>
+                            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Tìm kiểm danh liên hệ">
+                          </mat-form-field>
+                          <mat-table  [dataSource]="dataSource">
+                              <ng-container matColumnDef="MaLienHe">
+                                  <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+                                    <mat-cell *matCellDef="let lienhe">{{lienhe.MaLienHe}}</mat-cell>
+                              </ng-container>
+                              <ng-container matColumnDef="HoTen">
+                                  <mat-header-cell *matHeaderCellDef>Họ tên</mat-header-cell>
+                                  <mat-cell *matCellDef="let lienhe">{{lienhe.HoTen}}</mat-cell>
+                              </ng-container>
+                              <ng-container matColumnDef="Email">
+                                  <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+                                  <mat-cell *matCellDef="let lienhe">{{lienhe.Email}}</mat-cell>
+                              </ng-container>
+                              <ng-container matColumnDef="ChuDe">
+                                  <mat-header-cell *matHeaderCellDef>Chủ đề</mat-header-cell>
+                                  <mat-cell *matCellDef="let lienhe">{{lienhe.ChuDe}}</mat-cell>
+                              </ng-container>
+                  
+                              <ng-container matColumnDef="thaotac">
+                                  <mat-header-cell *matHeaderCellDef>Thao tác</mat-header-cell>
+                                  <mat-cell *matCellDef="let lienhe"><a class="btn btn-success" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></mat-cell>
+                              </ng-container>
+                              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                              
+                              <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                              
+                          </mat-table>
+                          <mat-paginator #paginator
+                          [pageSize]="10"
+                          [pageSizeOptions]="[5, 10, 20]"
+                          [showFirstLastButtons]="true">
+                          </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

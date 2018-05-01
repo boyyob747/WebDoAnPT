@@ -58,4 +58,79 @@ export class QluserService {
   getDsTruong(){
     return this.http.get(this.rootUrl + '/api/dstruong').map(res=>res.json().response);
   }
+  getNganhTruong(){
+    return this.http.get(this.rootUrl + '/api/getnganhtruong').map(res=>res.json().response);
+  }
+  addTruong(idTruong:string,TenTruong:string,DiaChi:string
+    ,NamThanhLap:string,TamNhin:string,SuMang
+    ,GioiThieu:string,Logo:string,HieuTruong:string,DienThoai:string){
+    const data = {"idTruong" : idTruong,
+    "TenTruong" : TenTruong,
+    "DiaChi" : DiaChi,
+    "NamThanhLap" : NamThanhLap,
+    "TamNhin" : TamNhin,
+    "SuMang" : SuMang,
+    "GioiThieu" : GioiThieu,
+    "Logo" : Logo,
+    "HieuTruong" : HieuTruong,
+    "DienThoai" : DienThoai,};
+    return this.http.post(this.rootUrl + '/api/themtruong',data).map(res=>res.json().response);
+  }
+  suaTruong(MaTruong:string,TenTruong:string,DiaChi:string
+    ,NamThanhLap:string,TamNhin:string,SuMang
+    ,GioiThieu:string,Logo:string,HieuTruong:string,DienThoai:string){
+    const data = {"MaTruong" : MaTruong,
+    "TenTruong" : TenTruong,
+    "DiaChi" : DiaChi,
+    "NamThanhLap" : NamThanhLap,
+    "TamNhin" : TamNhin,
+    "SuMang" : SuMang,
+    "GioiThieu" : GioiThieu,
+    "Logo" : Logo,
+    "HieuTruong" : HieuTruong,
+    "DienThoai" : DienThoai,};
+    return this.http.post(this.rootUrl + '/api/suatruong',data).map(res=>res.json().response);
+  }
+  xoaTruong(MaTruong:string){
+    const data = {"MaTruong" : MaTruong};
+    return this.http.post(this.rootUrl + '/api/xoatruong',data).map(res=>res.json().response);
+  }
+  addNganhTruong(maNganhs:any[],maTruong:string){
+    var values = "";
+    var index = 0;
+    for (let maNganh of maNganhs) {
+      values = values + "('" + maTruong + "','" + maNganh + "')";
+      index = index + 1;
+      if (index != maNganhs.length){
+        values = values + ",";
+      }
+    }
+    const data = {"values" : values};
+    return this.http.post(this.rootUrl + '/api/addnganhtruong',data).map(res=>res.json().response);
+  }
+  getSinhvien(){
+    return this.http.get(this.rootUrl + '/api/dssinhvien').map(res=>res.json().response);
+  }
+  xoaSinhvien(MaTruong:string){
+    const data = {"MaTruong" : MaTruong};
+    return this.http.post(this.rootUrl + '/api/xoasinhvien',data).map(res=>res.json().response);
+  }
+  addSinhvien(MaSV:string,TenSV:string,MaTruong:string,MaNganh:string,GioiTinh:string,
+  Email:string,NgaySinh:any,DienThoai:string,DiaChiThuongTru:string,
+  DiaChiTamTru:string){
+    const data = {"MaSV" : MaSV,
+    "TenSV" : TenSV,
+    "MaTruong" : MaTruong,
+    "MaNganh" : MaNganh,
+    "GioiTinh" : GioiTinh,
+    "Email" : Email,
+    "NgaySinh" : NgaySinh,
+    "DienThoai" : DienThoai,
+    "DiaChiThuongTru" : DiaChiThuongTru,
+    "DiaChiTamTru" : DiaChiTamTru,};
+    return this.http.post(this.rootUrl + '/api/themsinhvien',data).map(res=>res.json().response);
+  }
+  getdslienhe(){
+    return this.http.get(this.rootUrl + '/api/dslienhe').map(res=>res.json().response);
+  }
 }

@@ -30,6 +30,9 @@ import { NbThemeModule, NbSidebarService } from '@nebular/theme';
 import { PagesComponent } from './pages/pages.component';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
+
+
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -51,7 +54,6 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
     AdminLayoutComponent,
     LoginComponent,
     PagesComponent,
-
   ],
   providers: [QluserService,NbSidebarService],
   bootstrap: [AppComponent]
