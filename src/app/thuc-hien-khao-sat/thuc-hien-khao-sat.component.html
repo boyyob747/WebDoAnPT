@@ -1,3 +1,107 @@
-<p>
-  thuc-hien-khao-sat works!
-</p>
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                      <b><h3>Thêm mới Trường đại học, cao đẳng</h3></b>
+                  </div>
+                  <div class="card-body">
+                      
+                      <form (ngSubmit)="onAddTruong()">
+                          <div class="row">
+                              <div class="col-md-8">
+                                <mat-form-field class="example-full-width">
+                                  <input [(ngModel)]="idTruong" required name="idTruong" matInput placeholder="Họ và tên" type="text">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-8">
+                                  <mat-form-field class="example-full-width">
+                                      <input [(ngModel)]="DiaChi" name="DiaChi" matInput placeholder="MSSV" required type="text">
+                                    </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4">
+                                    <mat-form-field>
+                                            <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Trường tốt nghiệp" multiple>
+                                              <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
+                                            </mat-select>
+                                    </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                                  <mat-form-field>
+                                          <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Ngành tốt nghiệp" multiple>
+                                            <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
+                                          </mat-select>
+                                  </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4">
+                                <mat-form-field>
+                                        <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Tình trạng việc làm" multiple>
+                                          <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
+                                        </mat-select>
+                                </mat-form-field>
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                              <mat-form-field>
+                                      <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Khu vực làm việc (* chỉ bắt buộc đối với người đã có việc làm)" multiple>
+                                        <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
+                                      </mat-select>
+                              </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4">
+                            <mat-form-field>
+                                    <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Bạn có làm việc đúng ngành (* chỉ bắt buộc đối với người đã có việc làm)" multiple>
+                                      <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
+                                    </mat-select>
+                            </mat-form-field>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                          <mat-form-field>
+                                  <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Mức lương của bạn (* chỉ bắt buộc đối với người đã có việc làm)" multiple>
+                                    <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
+                                  </mat-select>
+                          </mat-form-field>
+                    </div>
+                    </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                                  <mat-form-field>
+                                          <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Thời gian có việc sau khi ra trường (* chỉ bắt buộc đối với người đã có việc làm)" multiple>
+                                            <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
+                                          </mat-select>
+                                  </mat-form-field>
+                            </div>
+                        </div>
+
+
+                          <div class="row">
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                    <textarea matInput [(ngModel)]="SuMang" name="SuMang" placeholder="Chi tiết khác" type="text"></textarea>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <br>
+                          <button mat-raised-button type="submit" class="btn btn-info pull-right">Thêm</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
