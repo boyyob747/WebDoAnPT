@@ -1,3 +1,71 @@
-<p>
-  lien-he works!
-</p>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <b><h3>Liên hệ</h3></b>
+                    </div>
+                    <div class="card-body">
+                        
+                        <form (ngSubmit)="onAddTruong()">
+                            <div class="row">
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input [(ngModel)]="idTruong" required name="idTruong" matInput placeholder="1. Họ tên:" type="text">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="DiaChi" name="DiaChi" matInput placeholder="2. Email:" required type="text">
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-1">
+                                    <mat-form-field>
+                                   <input value="@" matInput disabled>
+                                   </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <mat-form-field>
+                                        <mat-select  required placeholder="">
+                                          <mat-option value="gmail.com">gmail.com</mat-option>
+                                          <mat-option value="yahoo.com">yahoo.com</mat-option>
+                                          <mat-option value="hotmail.com">hotmail.com</mat-option>
+                                        </mat-select>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                  <p>(Bạn cần nhập đúng email để chúng tôi có thể gửi phản hồi về đúng địa chỉ email của bạn)</p>
+                              </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                      <mat-form-field>
+                                              <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="3. Chủ đề:" multiple>
+                                                <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
+                                              </mat-select>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <mat-form-field class="example-full-width">
+                                      <textarea matInput [(ngModel)]="TamNhin" name="TamNhin" placeholder="4. Nội dung:" type="text"></textarea>
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <br>
+                            <button mat-raised-button type="submit" class="btn btn-info pull-right">Gửi</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

@@ -1,107 +1,132 @@
 <div class="main-content">
-  <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-12">
-              <div class="card">
-                  <div class="card-header card-header-primary">
-                      <b><h3>Thêm mới Trường đại học, cao đẳng</h3></b>
-                  </div>
-                  <div class="card-body">
-                      
-                      <form (ngSubmit)="onAddTruong()">
-                          <div class="row">
-                              <div class="col-md-8">
-                                <mat-form-field class="example-full-width">
-                                  <input [(ngModel)]="idTruong" required name="idTruong" matInput placeholder="Họ và tên" type="text">
-                                </mat-form-field>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                              <h4 class="card-title mt-0">Phiếu khảo sát tình trạng việc làm của sinh viên tốt nghiệp 2018</h4>
+                              
+                        </div>
+                        <div class="card-body">
+                              <p>Thân gửi Anh/Chị cựu sinh viên,
+                                      Với mục tiêu đào tạo sinh viên tốt nghiệp có việc làm đáp ứng nhu cầu của thị trường lao động, chúng tôi triển khai khảo sát về tình trạng việc làm của sinh viên tốt nghiệp năm 2018. Chúng tôi trân trọng đề nghị Anh/Chị cung cấp thông tin theo các nội dung dưới đây bằng cách đánh dấu vào ô phù hợp hoặc điền thông tin vào các khoảng trống. Chúng tôi đảm bảo các thông tin cá nhân trong Phiếu khảo sát hoàn toàn được bảo mật. Cảm ơn sự hợp tác của Anh/chị!</p>
+                            <form (ngSubmit)="onAddTruong()">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                      <p>1. Họ và tên</p>
+                                      <mat-form-field class="example-full-width">
+                                        <input [(ngModel)]="idTruong" required name="idTruong" matInput  type="text">
+                                      </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                          <p>2. MSSV</p>
+                                        <mat-form-field class="example-full-width">
+                                            <input [(ngModel)]="DiaChi" name="DiaChi" matInput  required type="text">
+                                          </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-4">
+                                      <section class="example-section">
+                                          <p class="example-margin">3. Giới tính (*) </p>
+                                          <mat-radio-group [(ngModel)]="GioiTinh">
+                                            <mat-radio-button class="example-margin" value="1">Nam</mat-radio-button>
+                                            <mat-radio-button class="example-margin" value="0">Nữ</mat-radio-button>
+                                          </mat-radio-group>
+                                        </section>
+                                  </div>
+                                 
                               </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-8">
-                                  <mat-form-field class="example-full-width">
-                                      <input [(ngModel)]="DiaChi" name="DiaChi" matInput placeholder="MSSV" required type="text">
-                                    </mat-form-field>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                          <p class="example-margin">4. Trường tốt nghiệp (*)</p>
+                                          <mat-form-field>
+                                                  <mat-select [(ngModel)]="MaTruong" name="MaTruong"  required  multiple>
+                                                    <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
+                                                  </mat-select>
+                                          </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-8">
+                                          <p class="example-margin">5. Ngành tốt nghiệp (*)</p>
+                                        <mat-form-field>
+                                                <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required  multiple>
+                                                  <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
+                                                </mat-select>
+                                        </mat-form-field>
+                                  </div>
                               </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-4">
+                              <div class="row">
+                                <div class="col-md-8">
+                                      <p class="example-margin">6. Tình trạng việc làm (*)</p>
+                                      <mat-form-field>
+                                              <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required  multiple>
+                                                <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
+                                              </mat-select>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-8">
+                                      <p class="example-margin">7. Khu vực làm việc (* chỉ bắt buộc đối với người đã có việc làm)</p>
                                     <mat-form-field>
-                                            <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Trường tốt nghiệp" multiple>
+                                            <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required  multiple>
                                               <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
                                             </mat-select>
                                     </mat-form-field>
                               </div>
                           </div>
                           <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-8">
+                                  <p class="example-margin">8. Bạn có làm việc đúng ngành (* chỉ bắt buộc đối với người đã có việc làm)</p>
                                   <mat-form-field>
-                                          <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Ngành tốt nghiệp" multiple>
+                                          <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required  multiple>
                                             <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
                                           </mat-select>
                                   </mat-form-field>
                             </div>
                         </div>
                         <div class="row">
-                          <div class="col-md-4">
+                          <div class="col-md-8">
+                                  <p class="example-margin">9. Mức lương của bạn (* chỉ bắt buộc đối với người đã có việc làm)</p>
                                 <mat-form-field>
-                                        <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Tình trạng việc làm" multiple>
+                                        <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required  multiple>
                                           <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
                                         </mat-select>
                                 </mat-form-field>
                           </div>
                       </div>
-                      <div class="row">
-                        <div class="col-md-4">
-                              <mat-form-field>
-                                      <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Khu vực làm việc (* chỉ bắt buộc đối với người đã có việc làm)" multiple>
-                                        <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
-                                      </mat-select>
-                              </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                            <mat-form-field>
-                                    <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Bạn có làm việc đúng ngành (* chỉ bắt buộc đối với người đã có việc làm)" multiple>
-                                      <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
-                                    </mat-select>
-                            </mat-form-field>
-                      </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-4">
-                          <mat-form-field>
-                                  <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Mức lương của bạn (* chỉ bắt buộc đối với người đã có việc làm)" multiple>
-                                    <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
-                                  </mat-select>
-                          </mat-form-field>
-                    </div>
-                    </div>
-                          <div class="row">
-                            <div class="col-md-4">
-                                  <mat-form-field>
-                                          <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required placeholder="Thời gian có việc sau khi ra trường (* chỉ bắt buộc đối với người đã có việc làm)" multiple>
-                                            <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
-                                          </mat-select>
-                                  </mat-form-field>
-                            </div>
-                        </div>
-
-
-                          <div class="row">
-                              <div class="col-md-12">
-                                <mat-form-field class="example-full-width">
-                                    <textarea matInput [(ngModel)]="SuMang" name="SuMang" placeholder="Chi tiết khác" type="text"></textarea>
-                                </mat-form-field>
+                                <div class="row">
+                                  <div class="col-md-8">
+                                          <p class="example-margin">10. Thời gian có việc sau khi ra trường (* chỉ bắt buộc đối với người đã có việc làm)</p>
+                                        <mat-form-field>
+                                                <mat-select [(ngModel)]="ChooseNganh" name="ChooseNganh"  required multiple>
+                                                  <mat-option *ngFor="let nganh of nganhs" [value]="nganh.MaNH">{{nganh.TenNH}}</mat-option>
+                                                </mat-select>
+                                        </mat-form-field>
+                                  </div>
                               </div>
-                          </div>
-                          <br>
-                          <button mat-raised-button type="submit" class="btn btn-info pull-right">Thêm</button>
-                          <div class="clearfix"></div>
-                      </form>
-                  </div>
-              </div>
-          </div>
+      
+      
+                                <div class="row">
+                                    <div class="col-md-12">
+                                          <p class="example-margin">11. Chi tiết khác</p>
+                                      <mat-form-field class="example-full-width">
+                                          <textarea matInput [(ngModel)]="SuMang" name="SuMang"  type="text"></textarea>
+                                      </mat-form-field>
+                                    </div>
+                                </div>
+                                
+                                <button mat-raised-button type="submit" class="btn btn-info pull-right">Gửi</button>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
       </div>
-  </div>
-</div>
+      
