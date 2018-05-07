@@ -9,6 +9,9 @@ export class QluserService {
   getUsers(){
     return this.http.get(this.rootUrl + '/api/danhsachusers').map(res=>res.json().response);
   }
+  getAllUser(orderBy:any){
+    return this.http.get(this.rootUrl + '/api/getallusers/' + orderBy).map(res=>res.json().response);
+  }
   doLogin(username:string,password:string){
     const data = {"username" : username,"password" : password};
     return this.http.post(this.rootUrl + '/api/dologin',data).map(res=>res.json().response);
@@ -17,13 +20,17 @@ export class QluserService {
     const data = {"userId" : userId};
     return this.http.post(this.rootUrl + '/api/thongtinuser',data).map(res=>res.json().response);
   }
+  getUserByID(userId:string){
+    const data = {"userId" : userId};
+    return this.http.post(this.rootUrl + '/api/getuserbyid',data).map(res=>res.json().response);
+  }
   getChucVu(){
     return this.http.get(this.rootUrl + '/api/chucvu').map(res=>res.json().response);
   }
   getLastUserID(){
     return this.http.get(this.rootUrl + '/api/lastuserid').map(res=>res.json().response);
   }
-  addUser(name:string,username:string,password:string,email:string,DiaChi:string,GioiTinh:string,NgaySinh:Date,SoDienThoai:string,TrangThai:string,MaChucVu:string){
+  addUser(name:string,username:string,password:string,email:string,DiaChi:string,GioiTinh:string,NgaySinh:any,SoDienThoai:string,TrangThai:string,MaChucVu:string){
     const data = {"name" : name,
     "username" : username,
     "email" : email,
@@ -35,6 +42,28 @@ export class QluserService {
     "TrangThai" : TrangThai,
     "MaChucVu" : MaChucVu};
     return this.http.post(this.rootUrl + '/api/adduser',data).map(res=>res.json().response);
+  }
+  updateUser(userId:string,name:string,username:string,password:string,email:string,DiaChi:string,GioiTinh:string,NgaySinh:any,SoDienThoai:string,MaChucVu:string){
+    const data = {"userId" : userId ,
+    "name" : name,
+    "username" : username,
+    "email" : email,
+    "password" : password,
+    "DiaChi" : DiaChi,
+    "GioiTinh" : GioiTinh,
+    "NgaySinh" : NgaySinh,
+    "SoDienThoai" : SoDienThoai,
+    "MaChucVu" : MaChucVu};
+    return this.http.post(this.rootUrl + '/api/updateuser',data).map(res=>res.json().response);
+  }
+  deleteUser(userId:any){
+    return this.http.get(this.rootUrl + '/api/deleteuser/'+userId).map(res=>res.json().response);
+  }
+  khoaUser(userId:any){
+    return this.http.get(this.rootUrl + '/api/khoauser/'+userId).map(res=>res.json().response);
+  }
+  KichHoatUser(userId:any){
+    return this.http.get(this.rootUrl + '/api/kichhoatuser/'+userId).map(res=>res.json().response);
   }
   getDSnganh(){
     return this.http.get(this.rootUrl + '/api/dsnganhhoc').map(res=>res.json().response);

@@ -12,7 +12,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                   <mat-form-field class="example-full-width">
-                                    <input [(ngModel)]="UserID" name="UserID" matInput placeholder="ID" [value]="lastID" disabled type="text">
+                                    <input [(ngModel)]="UserID" name="UserID" matInput placeholder="ID" disabled type="text">
                                   </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
@@ -38,7 +38,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                    <mat-select [(ngModel)]="MaChucVu" name="MaChucVu" class="example-full-width">
+                                    <mat-select [(ngModel)]="MaChucVu" name="MaChucVu" required placeholder="Chức vụ" class="example-full-width">
                                         <mat-option  *ngFor="let chucvu of chucvus" [value]="chucvu.MaCV">
                                           {{ chucvu.TenCV }}
                                         </mat-option>
@@ -49,6 +49,23 @@
                                   <mat-form-field class="example-full-width">
                                     <input matInput [(ngModel)]="email" name="email" placeholder="Email" required type="text">
                                   </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                   
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select [(ngModel)]="GioiTinh" placeholder="Giới tính" required name="GioiTinh" class="example-full-width">
+                                            <mat-option   [value]="1">
+                                                Nam
+                                            </mat-option>
+                                            <mat-option   [value]="0">                                              
+                                                Nữ
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <div class="row">
@@ -71,7 +88,26 @@
                                 </div>
                             </div>
                             <br>
-                            <button mat-raised-button type="submit" class="btn btn-info pull-right">Thêm</button>
+                            <div class="row">
+                                    <div class="col-md-12">
+                                    <div class="pull-right">
+                                            <button mat-raised-button type="button" color="accent" (click)="goBack()">Quay về</button>
+                                            <button *ngIf="isUpdate != true" type="button" (click)="onLamMoi()" mat-raised-button color="warn">Làm mới</button>
+                                            <button *ngIf="isUpdate" mat-raised-button type="submit" color="primary">Cập nhật thông tin</button>
+                                            <button *ngIf="isUpdate != true" mat-raised-button type="submit" color="primary">Thêm</button>
+                                            <swal
+                                            #deleteuser
+                                            title="Xóa người dùng "
+                                            text="Bạn có muốn xóa {{username}} không ?" 
+                                            type="warning"
+                                            [showCancelButton]="true"
+                                            (confirm)="onClickDeleteUser(UserID)">
+                                            </swal>
+                                            <button [swal]="deleteuser" type="button" *ngIf="isUpdate" mat-raised-button color="warn">Xóa</button>
+                                    </div>
+                                    </div>
+                            </div>
+                            
                             <div class="clearfix"></div>
                         </form>
                     </div>

@@ -25,6 +25,46 @@ router.get('/users', function(req, res, next) {
        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
    });
 });
+router.get('/getallusers/:orderby', function(req, res, next) {
+    res.locals.connection.query('SELECT * FROM `user` ORDER BY '+ req.params.orderby, function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+router.get('/deleteuser/:id', function(req, res, next) {
+    res.locals.connection.query('DELETE FROM `user` WHERE UserID =' + req.params.id, function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/khoauser/:id', function(req, res, next) {
+    res.locals.connection.query('UPDATE `user` SET `TrangThai`=0 WHERE UserID =' + req.params.id, function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/kichhoatuser/:id', function(req, res, next) {
+    res.locals.connection.query('UPDATE `user` SET `TrangThai`=1 WHERE UserID = ' + req.params.id, function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+router.post('/getuserbyid', function(req, res, next) {
+    const userId = req.body.userId;
+    var sql = "SELECT * FROM `user` WHERE user.UserID='"+userId+"'";
+   res.locals.connection.query(sql, function (error, results, fields) {
+       if (error) throw error;
+       res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+   });
+});
+router.post('/updateuser', function(req, res, next) {
+    const userId = req.body.userId;
+    var sql = "UPDATE `user` SET `name`='"+req.body.name+"',`username`='"+req.body.username+"',`email`='"+req.body.email+"',`password`='"+req.body.password+"',`DiaChi`='"+req.body.DiaChi+"',`GioiTinh`='"+req.body.GioiTinh+"',`NgaySinh`='"+req.body.NgaySinh+"',`SoDienThoai`='"+req.body.SoDienThoai+"',`MaChucVu`='"+req.body.MaChucVu+"' WHERE UserID='"+userId+"'";
+   res.locals.connection.query(sql, function (error, results, fields) {
+       if (error) throw error;
+       res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+   });
+});
 //
 router.get('/lastuserid', function(req, res, next) {
     res.locals.connection.query('SELECT MAX(UserID) as lastID FROM user', function (error, results, fields) {
