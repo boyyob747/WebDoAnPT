@@ -14,7 +14,7 @@ export class DanhSachUsersComponent implements OnInit {
   public loading = false;
   private username:string;
   private timkiem:string;
-  private sortby:any;
+  private sortby:string;
   dataSource = new MatTableDataSource(this.users);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

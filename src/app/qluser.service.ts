@@ -140,6 +140,12 @@ export class QluserService {
   getSinhvien(){
     return this.http.get(this.rootUrl + '/api/dssinhvien').map(res=>res.json().response);
   }
+  getSV(maSV:string){
+    return this.http.get(this.rootUrl + '/api/getsv/'+maSV).map(res=>res.json().response);
+  }
+  getSinhvienOrder(orderBy:any){
+    return this.http.get(this.rootUrl + '/api/dssv/'+orderBy).map(res=>res.json().response);
+  }
   xoaSinhvien(MaTruong:string){
     const data = {"MaTruong" : MaTruong};
     return this.http.post(this.rootUrl + '/api/xoasinhvien',data).map(res=>res.json().response);
@@ -159,7 +165,33 @@ export class QluserService {
     "DiaChiTamTru" : DiaChiTamTru,};
     return this.http.post(this.rootUrl + '/api/themsinhvien',data).map(res=>res.json().response);
   }
+  updateSinhvien(MaSV:string,TenSV:string,MaTruong:string,MaNganh:string,GioiTinh:string,
+    Email:string,NgaySinh:any,DienThoai:string,DiaChiThuongTru:string,
+    DiaChiTamTru:string){
+      const data = {"MaSV" : MaSV,
+      "TenSV" : TenSV,
+      "MaTruong" : MaTruong,
+      "MaNganh" : MaNganh,
+      "GioiTinh" : GioiTinh,
+      "Email" : Email,
+      "NgaySinh" : NgaySinh,
+      "DienThoai" : DienThoai,
+      "DiaChiThuongTru" : DiaChiThuongTru,
+      "DiaChiTamTru" : DiaChiTamTru,};
+      return this.http.post(this.rootUrl + '/api/updatesinhvien',data).map(res=>res.json().response);
+    }
+    deleteSinhvien(MaSV:string){
+      return this.http.get(this.rootUrl + '/api/deletesv/'+MaSV).map(res=>res.json().response);
+    }
+  //line he 
   getdslienhe(){
     return this.http.get(this.rootUrl + '/api/dslienhe').map(res=>res.json().response);
+  }
+  sendLienHe(HoTen:string,Email:string,ChuDe:string,NoiDung:string){
+    const data = {"HoTen" : HoTen,
+    "Email" : Email,
+    "ChuDe" : ChuDe,
+    "NoiDung" : NoiDung};
+    return this.http.post(this.rootUrl + '/api/themlienhe',data).map(res=>res.json().response);
   }
 }

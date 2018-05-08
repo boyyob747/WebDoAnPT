@@ -78,6 +78,7 @@ router.get('/danhsachusers', function(req, res, next) {
         res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
     });
  });
+
  router.get('/chucvu', function(req, res, next) {
     res.locals.connection.query('SELECT `MaCV`, `TenCV` FROM `chucvu`', function (error, results, fields) {
         if (error) throw error;
@@ -186,6 +187,24 @@ router.get('/dssinhvien', function(req, res, next) {
         res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
     });
  });
+ router.get('/dssv/:orderby', function(req, res, next) {
+    res.locals.connection.query('SELECT sinhvien.MaSV, sinhvien.TenSV, truong.TenTruong as TenTruong, nganhhoc.TenNH as TenNganh, sinhvien.GioiTinh, sinhvien.Email, sinhvien.NgaySinh, sinhvien.DienThoai, sinhvien.DiaChiThuongTru, sinhvien.DiaChiTamTru, sinhvien.idSV FROM `sinhvien` INNER JOIN nganhhoc ON sinhvien.MaNganh=nganhhoc.MaNH INNER JOIN truong ON sinhvien.MaTruong=truong.MaTruong ORDER BY '+ req.params.orderby, function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/getsv/:id', function(req, res, next) {
+    res.locals.connection.query('SELECT * FROM `sinhvien` WHERE MaSV ='+ req.params.id, function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/deletesv/:id', function(req, res, next) {
+    res.locals.connection.query('DELETE FROM `sinhvien` WHERE MaSV ='+ req.params.id, function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
  router.post('/themsinhvien', function(req, res, next) {
     var sql = "INSERT INTO `sinhvien`(`MaSV`,`TenSV`, `MaTruong`, `MaNganh`, `GioiTinh`, `Email`, `NgaySinh`, `DienThoai`, `DiaChiThuongTru`, `DiaChiTamTru`) VALUES ("+
     "'"+req.body.MaSV+"','"+req.body.TenSV+"','"+req.body.MaTruong+"','"+req.body.MaNganh+"','"+req.body.GioiTinh+"','"
@@ -197,6 +216,16 @@ router.get('/dssinhvien', function(req, res, next) {
        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
    });
 });
+router.post('/updatesinhvien', function(req, res, next) {
+    var sql = "UPDATE `sinhvien` SET `TenSV`='"+req.body.TenSV+"',`MaTruong`='"+req.body.MaTruong+"',`MaNganh`='"+req.body.MaNganh+"',`GioiTinh`='"+req.body.GioiTinh
+    +"',`Email`='"+req.body.Email+"',`NgaySinh`='"+req.body.NgaySinh+"',`DienThoai`='"+req.body.DienThoai+"',`DiaChiThuongTru`='"+req.body.DiaChiThuongTru
+    +"',`DiaChiTamTru`='"+req.body.DiaChiTamTru+"' WHERE MaSV=" +req.body.MaSV;
+   res.locals.connection.query(sql, function (error, results, fields) {
+       if (error) throw error;
+       res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+   });
+});
+//
 // router.post('/suasinhvien', function(req, res, next) {
 //     var sql = "UPDATE `nganhhoc` SET `TenNH`='"+req.body.TenNH+"',`MoTa`='"+req.body.MoTa+"' WHERE MaNH = '"+req.body.MaNH+"'";
 //    res.locals.connection.query(sql, function (error, results, fields) {

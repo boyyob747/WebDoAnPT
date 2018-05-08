@@ -8,9 +8,29 @@
                       <h3 class="card-title ">Danh sách sinh viên</h3>
                   </div>
                   <div class="card-body">
-                      <mat-form-field>
-                          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Nhập vào tên sinh viên">
-                        </mat-form-field>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                    <mat-form-field>
+                                            <input matInput [(ngModel)]="timkiem" name="timkiem" placeholder="Nhập vào tên sinh viên">
+                                          </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-form-field class="example-full-width">
+                                        <mat-select [(ngModel)]="sortby" (change)="onSortBy()" name="sortby" class="example-full-width">
+                                            <mat-option   value="MaSV">
+                                                Lọc theo mã số sinh viên
+                                            </mat-option>
+                                            <mat-option   value="TenSV">                                              
+                                                Lọc theo tên
+                                            </mat-option>
+                                        </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                    <button (click)="applyFilter()" mat-raised-button color="primary">Tìm kiếm</button>
+                            </div>
+                        </div>
                         <mat-table  [dataSource]="dataSource">
                             <ng-container matColumnDef="MaSV">
                                 <mat-header-cell *matHeaderCellDef>MSSV</mat-header-cell>
@@ -44,18 +64,14 @@
                       
                             <ng-container matColumnDef="thaotac">
                                 <mat-header-cell *matHeaderCellDef>Thao tác</mat-header-cell>
-                                <mat-cell *matCellDef="let sinhvien"><a class="btn btn-success" href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></mat-cell>
+                                <mat-cell *matCellDef="let sinhvien"><a class="btn btn-success" [routerLink]="['/themsv',{'MaSV':sinhvien.MaSV}]">Xem</a></mat-cell>
                             </ng-container>
                             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                            
-                            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;">
+                            </mat-row>
                             
                         </mat-table>
-                        <mat-paginator #paginator
-                        [pageSize]="10"
-                        [pageSizeOptions]="[5, 10, 20]"
-                        [showFirstLastButtons]="true">
-                        </mat-paginator>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
                       </div>
                   </div>
               </div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QluserService } from '../qluser.service';
-import { Router } from '@angular/router';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-them-sinhvien',
   templateUrl: './them-sinhvien.component.html',
@@ -19,12 +19,12 @@ export class ThemSinhvienComponent implements OnInit {
   private Manganh:string;
   private GioiTinh:string;
   private Email:string;
-  private ngaySinh:Date;
+  private ngaySinh:any;
   private DienThoai:string;
   private DiaChiThuongTru:string;
   private DiaChiTamTru:string;
-
-  constructor(private dataService:QluserService,private router:Router) { }
+  private isUpdate = false;
+  constructor(private dataService:QluserService,private router:Router,private route: ActivatedRoute,private location: Location) { }
   ngOnInit() {
     this.onLoad();
   }
@@ -32,19 +32,48 @@ export class ThemSinhvienComponent implements OnInit {
       this.dataService.getDsTruong().subscribe(
         res=>{
           this.truongs = res;
+          this.dataService.getNganhTruong().subscribe(
+            res=>{
+              this.nganhTruongs = res;
+              if (this.route.snapshot.paramMap.get('MaSV') != null){
+                this.MaSV = this.route.snapshot.paramMap.get('MaSV');
+                this.dataService.getSV(this.MaSV).subscribe(
+                  res=>{
+                    var sinhvien = res[0];
+                    this.isUpdate = true;
+                    this.TenSV = sinhvien.TenSV;
+                    this.ngaySinh = sinhvien.NgaySinh;
+                    this.Email = sinhvien.Email;
+                    this.DienThoai = sinhvien.DienThoai;
+                    this.GioiTinh = sinhvien.GioiTinh;
+                    this.maTruong = sinhvien.MaTruong;
+                    this.onSelectedTruong();
+                    this.Manganh = sinhvien.MaNganh;
+                    this.DiaChiThuongTru = sinhvien.DiaChiThuongTru;
+                    this.DiaChiTamTru = sinhvien.DiaChiTamTru;
+                  });
+              }
+          });
         });
-        this.dataService.getNganhTruong().subscribe(
-          res=>{
-            this.nganhTruongs = res;
-        });
+        
   }
   onAddSinhvien(){
-    this.dataService.addSinhvien(this.MaSV,this.TenSV,this.maTruong,this.Manganh,this.GioiTinh,this.
-      Email,this.ngaySinh.toLocaleDateString(),this.DienThoai,this.DiaChiThuongTru,this.
-      DiaChiTamTru).subscribe(
-      res=>{
-        this.router.navigateByUrl('/dssv');
-      });
+    if (this.isUpdate){
+      this.dataService.updateSinhvien(this.MaSV,this.TenSV,this.maTruong,this.Manganh,this.GioiTinh,this.
+        Email,this.ngaySinh,this.DienThoai,this.DiaChiThuongTru,this.
+        DiaChiTamTru).subscribe(
+        res=>{
+          this.router.navigateByUrl('/dssv');
+        });
+    }else{
+      this.dataService.addSinhvien(this.MaSV,this.TenSV,this.maTruong,this.Manganh,this.GioiTinh,this.
+        Email,this.ngaySinh,this.DienThoai,this.DiaChiThuongTru,this.
+        DiaChiTamTru).subscribe(
+        res=>{
+          this.router.navigateByUrl('/dssv');
+        });
+    }
+    
   }
   onSelectedTruong(){
     this.isSelectedTruong = true;
@@ -57,6 +86,15 @@ export class ThemSinhvienComponent implements OnInit {
         });
       }
     }
+  }
+  goBack() {
+    this.location.back();
+  }
+  onClickDeleteSinhvien(MaSV:string){
+    this.dataService.deleteSinhvien(MaSV).subscribe(
+      res=>{
+        this.router.navigateByUrl('/dssv');
+    });
   }
 }
 interface Nganh {
