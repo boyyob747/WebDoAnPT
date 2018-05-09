@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { QluserService } from '../qluser.service';
 
 @Component({
@@ -9,8 +9,13 @@ import { QluserService } from '../qluser.service';
 })
 export class TruongComponent implements OnInit {
   private truongs:Truong[];
+  private nganhs:Nganh[];
   dataSource = new MatTableDataSource(this.truongs);
   displayedColumns = ["MaTruong","TenTruong","Logo","NamThanhLap","DiaChi","thaotac"];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  private timkiem:string;
+  private MaNH:any;
   constructor(private dataService:QluserService) { 
     this.onLoad();
   }
@@ -19,12 +24,18 @@ export class TruongComponent implements OnInit {
         res=>{
           this.truongs = res;
           this.dataSource = new MatTableDataSource(this.truongs);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         });
+        this.dataService.getDSnganh().subscribe(
+          res=>{
+            this.nganhs = res;
+          });
   }
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+  applyFilter() {
+    this.timkiem = this.timkiem .trim(); // Remove whitespace
+    this.timkiem  = this.timkiem .toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = this.timkiem ;
   }
   ngOnInit() {
   }

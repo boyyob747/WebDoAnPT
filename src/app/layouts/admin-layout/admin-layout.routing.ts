@@ -27,6 +27,8 @@ import { DsLineHeComponent } from '../../ds-line-he/ds-line-he.component';
 import { TrangchuComponent } from '../../trangchu/trangchu.component';
 import { LienHeComponent } from '../../lien-he/lien-he.component';
 import { ThucHienKhaoSatComponent } from '../../thuc-hien-khao-sat/thuc-hien-khao-sat.component';
+import { ThongTinLienHeComponent } from '../../thong-tin-lien-he/thong-tin-lien-he.component';
+import { TraLienLienHeComponent } from '../../tra-lien-lien-he/tra-lien-lien-he.component';
 export const AdminLayoutRoutes: Routes = [
     // {
     //   path: '',
@@ -95,5 +97,5 @@ export const AdminLayoutRoutes: Routes = [
     {path : 'qllienhe', component : DsLineHeComponent},
     { path : 'trangchu' , component : TrangchuComponent},
     { path : 'thuchienkhaosat' , component : ThucHienKhaoSatComponent},
-    {path : 'lienhe', component : LienHeComponent}
+    {path : 'lienhe', component : LienHeComponent},{path : 'thongtinlienhe', component : ThongTinLienHeComponent},{path : 'traloithongtin', component : TraLienLienHeComponent},
 ];

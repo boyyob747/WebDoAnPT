@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { QluserService } from '../qluser.service';
 
 @Component({
@@ -10,16 +10,23 @@ import { QluserService } from '../qluser.service';
 export class DsLineHeComponent implements OnInit {
 
   private lienhes:Lienhe[];
+  public loading = false;
   dataSource = new MatTableDataSource(this.lienhes);
   displayedColumns = ["MaLienHe","HoTen","Email","ChuDe","thaotac"];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(private dataService:QluserService) { 
     this.onLoad();
   }
   onLoad(){
+    this.loading = true;
       this.dataService.getdslienhe().subscribe(
         res=>{
+          this.loading = false;
           this.lienhes = res;
           this.dataSource = new MatTableDataSource(this.lienhes);
+          this.dataSource.paginator = this.paginator;
+         this.dataSource.sort = this.sort;
         });
   }
   applyFilter(filterValue: string) {

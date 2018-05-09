@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatRadioModule,MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,MatOptionModule, 
+import { MatSlideToggleModule,MatSliderModule,MatRadioModule,MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,MatOptionModule, 
   MatSortModule, MatTableModule , MatToolbarModule ,MatCardModule,MatFormFieldModule,MatSelectModule, MatMenuModule ,
    MatSidenavModule ,MatDividerModule,MatListModule,MatTabsModule,MatProgressBarModule,MatDatepickerModule,MatNativeDateModule,MatIconModule} from '@angular/material';
   import { RouterModule } from '@angular/router'; // we also need angular router for Nebular to function properly
   import { NbSidebarModule, NbLayoutModule } from '@nebular/theme';
   import { ChartsModule } from 'ng2-charts/ng2-charts';
+  import { LoadingModule } from 'ngx-loading';
 @NgModule({
-  imports: [MatRadioModule,ChartsModule,MatDatepickerModule,MatOptionModule,MatCardModule,MatInputModule,MatIconModule,
+  imports: [MatSlideToggleModule,MatSliderModule,LoadingModule,MatRadioModule,ChartsModule,MatDatepickerModule,MatOptionModule,MatCardModule,MatInputModule,MatIconModule,
     MatTableModule,
     MatPaginatorModule,
     RouterModule, // RouterModule.forRoot(routes, { useHash: true }), if this is your app.module
@@ -16,7 +17,7 @@ import { MatRadioModule,MatInputModule, MatPaginatorModule, MatProgressSpinnerMo
     MatSortModule,
     MatProgressSpinnerModule,
     MatToolbarModule,MatMenuModule,MatSidenavModule,MatFormFieldModule,MatSelectModule,MatDividerModule,MatListModule,MatTabsModule,MatProgressBarModule,MatNativeDateModule],
-  exports: [MatRadioModule,ChartsModule,MatDatepickerModule,MatIconModule,MatOptionModule,MatCardModule,MatInputModule,
+  exports: [MatSlideToggleModule,MatSliderModule,LoadingModule,MatRadioModule,ChartsModule,MatDatepickerModule,MatIconModule,MatOptionModule,MatCardModule,MatInputModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,

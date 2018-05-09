@@ -12,7 +12,7 @@
                           <div class="row">
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input [(ngModel)]="MaNH" name="MaNH" required matInput placeholder="Mã ngành" type="text">
+                                  <input [(ngModel)]="MaNH" [disabled]="isUpdate" name="MaNH" required matInput placeholder="Mã ngành" type="text">
                                 </mat-form-field>
                               </div>
                           </div>
@@ -31,7 +31,25 @@
                               </div>
                           </div>
                           <br>
-                          <button mat-raised-button type="submit" class="btn btn-info pull-right">Thêm</button>
+                          <div class="row">
+                            <div class="col-md-12">
+                            <div class="pull-right">
+                                    <button mat-raised-button type="button" color="accent" (click)="goBack()">Quay về</button>
+                                    <button *ngIf="isUpdate != true" type="button" (click)="onLamMoi()" mat-raised-button color="warn">Làm mới</button>
+                                    <button *ngIf="isUpdate" mat-raised-button type="submit" color="primary">Cập nhật thông tin</button>
+                                    <button *ngIf="isUpdate != true" mat-raised-button type="submit" color="primary">Thêm</button>
+                                    <swal
+                                    #deleteuser
+                                    title="Xóa ngành học "
+                                    text="Bạn có muốn xóa {{TenNH}} không ?" 
+                                    type="warning"
+                                    [showCancelButton]="true"
+                                    (confirm)="onClickDeleteNganh(MaNH)">
+                                    </swal>
+                                    <button [swal]="deleteuser" type="button" *ngIf="isUpdate" mat-raised-button color="warn">Xóa</button>
+                            </div>
+                            </div>
+                        </div>  
                           <div class="clearfix"></div>
                       </form>
                   </div>

@@ -10,6 +10,7 @@ app.use(function(req,res,next){
     res.setHeader('Access-Control-Allow-Credentials',true);
     next();
 });
+
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

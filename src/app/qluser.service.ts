@@ -74,6 +74,12 @@ export class QluserService {
     "MoTa" : MoTa};
     return this.http.post(this.rootUrl + '/api/themnganh',data).map(res=>res.json().response);
   }
+  updateNganh(MaNH:string,TenNH:string,MoTa:string){
+    const data = {"MaNH" : MaNH,
+    "TenNH" : TenNH,
+    "MoTa" : MoTa};
+    return this.http.post(this.rootUrl + '/api/updatenganh',data).map(res=>res.json().response);
+  }
   suaNganh(MaNH:string,TenNH:string,MoTa:string){
     const data = {"MaNH" : MaNH,
     "TenNH" : TenNH,
@@ -81,8 +87,7 @@ export class QluserService {
     return this.http.post(this.rootUrl + '/api/suanganh',data).map(res=>res.json().response);
   }
   xoaNganh(MaNH:string){
-    const data = {"MaNH" : MaNH};
-    return this.http.post(this.rootUrl + '/api/xoanganh',data).map(res=>res.json().response);
+    return this.http.get(this.rootUrl + '/api/xoanganh/'+MaNH).map(res=>res.json().response);
   }
   getDsTruong(){
     return this.http.get(this.rootUrl + '/api/dstruong').map(res=>res.json().response);
@@ -91,7 +96,7 @@ export class QluserService {
     return this.http.get(this.rootUrl + '/api/getnganhtruong').map(res=>res.json().response);
   }
   addTruong(idTruong:string,TenTruong:string,DiaChi:string
-    ,NamThanhLap:string,TamNhin:string,SuMang
+    ,NamThanhLap:any,TamNhin:string,SuMang
     ,GioiThieu:string,Logo:string,HieuTruong:string,DienThoai:string){
     const data = {"idTruong" : idTruong,
     "TenTruong" : TenTruong,
@@ -105,8 +110,26 @@ export class QluserService {
     "DienThoai" : DienThoai,};
     return this.http.post(this.rootUrl + '/api/themtruong',data).map(res=>res.json().response);
   }
+  updateTruong(idTruong:string,TenTruong:string,DiaChi:string
+    ,NamThanhLap:any,TamNhin:string,SuMang
+    ,GioiThieu:string,Logo:string,HieuTruong:string,DienThoai:string){
+    const data = {"idTruong" : idTruong,
+    "TenTruong" : TenTruong,
+    "DiaChi" : DiaChi,
+    "NamThanhLap" : NamThanhLap,
+    "TamNhin" : TamNhin,
+    "SuMang" : SuMang,
+    "GioiThieu" : GioiThieu,
+    "Logo" : Logo,
+    "HieuTruong" : HieuTruong,
+    "DienThoai" : DienThoai,};
+    return this.http.post(this.rootUrl + '/api/suatruong',data).map(res=>res.json().response);
+  }
+  getTruong(idTruong:any){
+    return this.http.get(this.rootUrl + '/api/gettruongbyid/'+ idTruong).map(res=>res.json().response);
+  }
   suaTruong(MaTruong:string,TenTruong:string,DiaChi:string
-    ,NamThanhLap:string,TamNhin:string,SuMang
+    ,NamThanhLap:any,TamNhin:string,SuMang
     ,GioiThieu:string,Logo:string,HieuTruong:string,DienThoai:string){
     const data = {"MaTruong" : MaTruong,
     "TenTruong" : TenTruong,
@@ -136,6 +159,15 @@ export class QluserService {
     }
     const data = {"values" : values};
     return this.http.post(this.rootUrl + '/api/addnganhtruong',data).map(res=>res.json().response);
+  }
+  xoaNganhTruong(maTruong:string){
+    return this.http.get(this.rootUrl + '/api/xoanganhtruong/'+maTruong).map(res=>res.json().response);
+  }
+  getNganhTruongById(maTruong:string){
+    return this.http.get(this.rootUrl + '/api/getnganhtruongbyid/'+maTruong).map(res=>res.json().response);
+  }
+  getNganhByID(MaNH:any){
+    return this.http.get(this.rootUrl + '/api/getnganhbyid/'+MaNH).map(res=>res.json().response);
   }
   getSinhvien(){
     return this.http.get(this.rootUrl + '/api/dssinhvien').map(res=>res.json().response);
@@ -187,11 +219,23 @@ export class QluserService {
   getdslienhe(){
     return this.http.get(this.rootUrl + '/api/dslienhe').map(res=>res.json().response);
   }
+  getlienhe(id:any){
+    return this.http.get(this.rootUrl + '/api/getlienbyid/'+id).map(res=>res.json().response);
+  }
+  xoaLienhe(id:string){
+    return this.http.get(this.rootUrl + '/api/xoalienhe/'+id).map(res=>res.json().response);
+  }
   sendLienHe(HoTen:string,Email:string,ChuDe:string,NoiDung:string){
     const data = {"HoTen" : HoTen,
     "Email" : Email,
     "ChuDe" : ChuDe,
     "NoiDung" : NoiDung};
     return this.http.post(this.rootUrl + '/api/themlienhe',data).map(res=>res.json().response);
+  }
+  traloithongtin(toEmail:string,subject:string,text:string){
+    const data = {"toEmail" : toEmail,
+    "subject" : subject,
+    "text" : text};
+    return this.http.post(this.rootUrl + '/api/sendemail',data).map(res=>res.json().response);
   }
 }

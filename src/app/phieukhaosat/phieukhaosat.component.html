@@ -1,3 +1,57 @@
-<p>
-  phieukhaosat works!
-</p>
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                      <b><h3>Phiếu khảo sát</h3></b>
+                  </div>
+                  <div class="card-body">
+                      
+                      <form (ngSubmit)="onSendEmail()">
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input [(ngModel)]="HoTen" required name="HoTen" matInput placeholder="Tiêu đề" type="text">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                <mat-form-field class="example-full-width">
+                                    <textarea style="resize: vertical;" matInput [(ngModel)]="NoiDung" name="NoiDung" placeholder="Mô tả" type="text"></textarea>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <p>Câu hỏi khảo sát:</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <mat-form-field class="example-full-width">
+                                <input [(ngModel)]="HoTen" required name="HoTen" matInput placeholder="Họ và tên" type="text">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                              <input [(ngModel)]="HoTen" required name="HoTen" matInput placeholder="Giới tính" type="text">
+                            </mat-form-field>
+                          </div>
+                      </div>
+                          <br>
+                          <button mat-raised-button type="submit" class="btn btn-info pull-right">Gửi</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -115,6 +115,21 @@ router.get('/lastnganhid', function(req, res, next) {
        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
    });
 });
+router.post('/updatenganh', function(req, res, next) {
+    var sql = "UPDATE `nganhhoc` SET `TenNH`='"+req.body.TenNH+"',`MoTa`='"+req.body.MoTa+"' WHERE MaNH='" + req.body.MaNH + "'";
+   res.locals.connection.query(sql, function (error, results, fields) {
+       if (error) throw error;
+       res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+   });
+});
+//
+router.get('/getnganhbyid/:MaNH', function(req, res, next) {
+    var sql = 'SELECT * FROM `nganhhoc` WHERE MaNH ='+ req.params.MaNH;
+   res.locals.connection.query(sql, function (error, results, fields) {
+       if (error) throw error;
+       res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+   });
+});
 router.get('/getnganhtruong', function(req, res, next) {
     var sql = "SELECT truong.MaTruong as MaTruong,truong.TenTruong as TenTruong,nganhhoc.MaNH as MaNganh ,nganhhoc.TenNH as TenNH , nganhhoc.MaNH as MaNH FROM `nganhtruong`  INNER JOIN truong on nganhtruong.MaTruong=truong.MaTruong INNER JOIN nganhhoc ON nganhtruong.MaNganh=nganhhoc.MaNH ";
    res.locals.connection.query(sql, function (error, results, fields) {
@@ -129,8 +144,22 @@ router.post('/suanganh', function(req, res, next) {
        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
    });
 });
-router.post('/xoanganh', function(req, res, next) {
-    var sql = "DELETE FROM `nganhhoc` WHERE MaNH = '"+req.body.MaNH+"'";
+router.get('/xoanganh/:MaNH', function(req, res, next) {
+    var sql = "DELETE FROM `nganhhoc` WHERE MaNH = '"+req.params.MaNH+"'";
+   res.locals.connection.query(sql, function (error, results, fields) {
+       if (error) throw error;
+       res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+   });
+});
+router.get('/xoanganhtruong/:maTruong', function(req, res, next) {
+    var sql = "DELETE FROM `nganhtruong` WHERE MaTruong = '"+req.params.maTruong+"'";
+   res.locals.connection.query(sql, function (error, results, fields) {
+       if (error) throw error;
+       res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+   });
+});
+router.get('/getnganhtruongbyid/:maTruong', function(req, res, next) {
+    var sql = "SELECT * FROM `nganhtruong` WHERE MaTruong = '"+req.params.maTruong+"'";
    res.locals.connection.query(sql, function (error, results, fields) {
        if (error) throw error;
        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
@@ -139,6 +168,12 @@ router.post('/xoanganh', function(req, res, next) {
 //truong
 router.get('/dstruong', function(req, res, next) {
     res.locals.connection.query('SELECT * FROM `truong`', function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/gettruongbyid/:id', function(req, res, next) {
+    res.locals.connection.query("SELECT * FROM `truong` WHERE idTruong='" + req.params.id + "'", function (error, results, fields) {
         if (error) throw error;
         res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
     });
@@ -158,7 +193,8 @@ router.post('/suatruong', function(req, res, next) {
     var sql = "UPDATE `truong` SET `TenTruong`='"+req.body.TenTruong+"',`DiaChi`='"+req.body.DiaChi+"',"+
     "`NamThanhLap`='"+req.body.NamThanhLap+"',`TamNhin`='"+req.body.TamNhin+"',`SuMang`='"+req.body.SuMang+"',"+
     "`GioiThieu`='"+req.body.GioiThieu+"',`Logo`='"+req.body.Logo+"',`HieuTruong`='"+req.body.HieuTruon+"',"+
-    "`DienThoai`='"+req.body.DienThoai + " WHERE MaTruong = '" +req.body.MaTruong+ "'" ;
+    "`DienThoai`='"+req.body.DienThoai + "' WHERE MaTruong = '" +req.body.MaTruong+ "'" ;
+    console.log("sql = " + sql);
    res.locals.connection.query(sql, function (error, results, fields) {
        if (error) throw error;
        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
@@ -225,14 +261,6 @@ router.post('/updatesinhvien', function(req, res, next) {
        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
    });
 });
-//
-// router.post('/suasinhvien', function(req, res, next) {
-//     var sql = "UPDATE `nganhhoc` SET `TenNH`='"+req.body.TenNH+"',`MoTa`='"+req.body.MoTa+"' WHERE MaNH = '"+req.body.MaNH+"'";
-//    res.locals.connection.query(sql, function (error, results, fields) {
-//        if (error) throw error;
-//        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
-//    });
-// });
 router.post('/xoasinhvien', function(req, res, next) {
     var sql = "DELETE FROM `sinhvien` WHERE MaSV = '"+req.body.MaSV+"'";
    res.locals.connection.query(sql, function (error, results, fields) {
@@ -247,11 +275,48 @@ router.get('/dslienhe', function(req, res, next) {
         res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
     });
  });
+ router.get('/getlienbyid/:id', function(req, res, next) {
+    res.locals.connection.query("SELECT * FROM `lienhe` WHERE MaLienHe ='"+ req.params.id + "'", function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/xoalienhe/:id', function(req, res, next) {
+    res.locals.connection.query('DELETE FROM `lienhe` WHERE MaLienHe ='+ req.params.id, function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
  router.post('/themlienhe', function(req, res, next) {
     var sql = "INSERT INTO `lienhe`(`HoTen`, `Email`, `ChuDe`, `NoiDung`) VALUES ('"+req.body.HoTen+"','"+req.body.Email+"','"+req.body.ChuDe+"','"+req.body.NoiDung+"')";
    res.locals.connection.query(sql, function (error, results, fields) {
        if (error) throw error;
        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
    });
+});
+//send email
+
+router.post('/sendemail', function(req, res, next) {
+    var nodemailer = require('nodemailer');
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'doanpt2018@gmail.com',
+        pass: 'doanpt123'
+      }
+    });
+    var mailOptions = {
+      from: 'HeThongThongKE',
+      to: req.body.toEmail,
+      subject: req.body.subject,
+      text: req.body.text
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": 'Email sent: ' + info.response}));
+      }
+    }); 
 });
  module.exports = router; // for fix error Router.use() requires a middleware function but got a Object

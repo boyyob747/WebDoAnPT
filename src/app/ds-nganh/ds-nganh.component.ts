@@ -14,8 +14,10 @@ export class DsNganhComponent implements OnInit {
   private nganhTruongs:Nganhtruong[];
   dataSource = new MatTableDataSource(this.nganhs);
   displayedColumns = ["MaNH","TenNH","thaotac"];
+  private timkiem:string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  public loading = false;
   constructor(private dataService:QluserService) { 
     this.nganhs = null;
     this.onLoad();
@@ -26,22 +28,24 @@ export class DsNganhComponent implements OnInit {
     //     this.nganhs = res;
     //     this.dataSource = new MatTableDataSource(this.nganhs);
     //   });
+    this.loading = true;
       this.dataService.getDsTruong().subscribe(
         res=>{
           this.truongs = res;
           this.MaTruong = this.truongs[0].MaTruong;
           this.dataService.getNganhTruong().subscribe(
             res=>{
+              this.loading = false;
               this.nganhTruongs = res;
               this.onSelectedTruong();
           });
         });
         
   }
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+  applyFilter() {
+    this.timkiem = this.timkiem .trim(); // Remove whitespace
+    this.timkiem  = this.timkiem .toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = this.timkiem ;
   }
   ngOnInit() {
   }

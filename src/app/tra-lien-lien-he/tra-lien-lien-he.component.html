@@ -1,0 +1,34 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                    <h4 class="card-title mt-0">Trả lời thông tin liên hệ: {{MaLienHe}}</h4>
+                  </div>
+                  <div class="card-body">
+                      
+                      <form (ngSubmit)="onTraloi()">
+                              <div class="col-md-12">
+                                <mat-form-field>
+                                    <textarea rows="10" cols="50" style="resize: vertical;" matInput [(ngModel)]="NoiDung" name="NoiDung" placeholder="Nội dung" type="text"></textarea>
+                                </mat-form-field>
+                              </div>
+                              <br>
+                              <div class="row">
+                                <div class="col-md-12">
+                                <div class="pull-right">
+                                        <button mat-raised-button type="button" color="accent" (click)="goBack()">Quay về</button>
+                                        <button  mat-raised-button color="primary" type="submit">Trả lời</button>
+                                </div>
+                                </div>
+                            </div>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
