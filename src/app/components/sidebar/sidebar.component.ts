@@ -51,7 +51,30 @@ export const ROUTES: RouteInfo[] = [
     { path: '/thongke', title: 'Thông kê',  icon: 'contact_mail', class: 'thongke' , subMenu : null ,iconArrow : 'keyboard_arrow_down',showMenu : '0',maChucVu : '1'},
     { path: '/baocao', title: 'Bao cáo',  icon: 'contact_mail', class: 'baocao' , subMenu : null ,iconArrow : 'keyboard_arrow_down',showMenu : '0',maChucVu : '1'},
 ];
-
+export const ROUTES2: RouteInfo[] = [
+    { path: '/thongtincanhan', title: 'Thông tin cá nhân',  icon: 'contact_mail', class: '' , subMenu : null ,iconArrow : 'keyboard_arrow_down',showMenu : '0',maChucVu : '1'},
+    { path: '', title: 'Quản lý sinh viên',  icon:'portrait', class: 'qlsv' , 
+    subMenu : [
+        {path : '/dssv',title : 'Danh sách sinh viên'},
+        {path : '/themsv',title : 'Thêm sinh viên'},
+        {
+            path : '/themdssv' , title : 'Thêm danh sách sinh viên'
+        }
+    ] ,iconArrow : 'keyboard_arrow_down',showMenu : '0',maChucVu : '1'},
+    { path: '', title: 'Quản lý trường ',  icon:'account_balance', class: 'qltruong' , 
+    subMenu : [
+        {path : '/danhtruong',title : 'Danh trường '},
+        {path : '/themtruong',title : 'Thêm trường'}
+    ] ,iconArrow : 'keyboard_arrow_down',showMenu : '0',maChucVu : '1'},
+    { path: '', title: 'Quản lý ngành',  icon:'work', class: 'qlngangh' , 
+    subMenu : [
+        {path : '/danhnganh',title : 'Danh ngành'},
+        {path : '/themnganh',title : 'Thêm ngành'}
+    ] ,iconArrow : 'keyboard_arrow_down',showMenu : '0',maChucVu : '1'},
+    //
+    { path: '/qllienhe', title: 'Quản lý liên hệ',  icon: 'link', class: 'qllienhe' , subMenu : null ,iconArrow : 'keyboard_arrow_down',showMenu : '0',maChucVu : '1'},
+    { path: '/baocao', title: 'Bao cáo',  icon: 'contact_mail', class: 'baocao' , subMenu : null ,iconArrow : 'keyboard_arrow_down',showMenu : '0',maChucVu : '1'},
+];
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -66,10 +89,15 @@ export class SidebarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+   
     
     if (localStorage.getItem("MaChucVu") != null){
         this.MaChucVu = localStorage.getItem("MaChucVu");
+        if (this.MaChucVu == "1"){
+            this.menuItems = ROUTES.filter(menuItem => menuItem);
+        }else if (this.MaChucVu == "2"){
+            this.menuItems = ROUTES2.filter(menuItem => menuItem);
+        }
     }
     console.log("this.MaChucVu = " + this.MaChucVu);
   }

@@ -1,3 +1,46 @@
-<p>
-  ket-qua-khao-sat works!
-</p>
+
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                      <h3 class="card-title ">Danh sách kết quả khảo sát gửi về</h3>
+                  </div>
+                  <div class="card-body">
+                        <mat-table  [dataSource]="dataSource">
+                            <ng-container *ngFor="let displayedColumn of displayedColumns; let i = index" matColumnDef="{{displayedColumn}}">
+                                <mat-header-cell *matHeaderCellDef>{{textColumns[i]}}</mat-header-cell>
+                                  <mat-cell *matCellDef="let phieu">{{phieu.MaPKQKS}}</mat-cell>
+                            </ng-container>
+                            <!-- <ng-container matColumnDef="TenSV">
+                                <mat-header-cell *matHeaderCellDef>tên</mat-header-cell>
+                                <mat-cell *matCellDef="let phieu">{{phieu.TenSV}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="MaSV">
+                                <mat-header-cell *matHeaderCellDef>MSSV</mat-header-cell>
+                                <mat-cell *matCellDef="let phieu">{{phieu.MaSV}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="GioiTinh">
+                              <mat-header-cell *matHeaderCellDef>Giới tính</mat-header-cell>
+                              <mat-cell *matCellDef="let phieu">
+                                <div *ngIf="phieu.GioiTinh==1">Nam</div>
+                                <div *ngIf="phieu.GioiTinh==0">Nữ</div>
+                              </mat-cell>
+                          </ng-container>
+                            <ng-container matColumnDef="thaotac">
+                                <mat-header-cell *matHeaderCellDef>Thao tác</mat-header-cell>
+                                <mat-cell *matCellDef="let phieu"><a class="btn btn-danger">Xóa</a></mat-cell>
+                            </ng-container> -->
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns;">
+                            </mat-row>
+                            
+                        </mat-table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

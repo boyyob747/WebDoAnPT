@@ -319,4 +319,114 @@ router.post('/sendemail', function(req, res, next) {
       }
     }); 
 });
+
+//ket-qua-khao-sat
+router.get('/getketquakhaosat/', function(req, res, next) {
+    res.locals.connection.query('SELECT phieuketquakhaosat.MaPKQKS, phieuketquakhaosat.ThoiGianNopKS,phieuketquakhaosat.MaSV,sinhvien.TenSV,sinhvien.GioiTinh,truong.TenTruong,nganhhoc.TenNH,GROUP_CONCAT(cauhoi.NoiDungCH) AS CauHoi,GROUP_CONCAT(thongtindienkhatsat.CauTraLoi) AS CauTraLoi FROM phieuketquakhaosat INNER JOIN sinhvien ON phieuketquakhaosat.MaSV=sinhvien.MaSV INNER JOIN truong ON sinhvien.MaTruong=truong.MaTruong INNER JOIN nganhhoc ON sinhvien.MaNganh=nganhhoc.MaNH LEFT JOIN thongtindienkhatsat ON thongtindienkhatsat.MaPKQKS=phieuketquakhaosat.MaPKQKS LEFT JOIN cauhoi ON thongtindienkhatsat.MaCauHoi=cauhoi.MaCH ORDER BY phieuketquakhaosat.MaPKQKS', function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/getcauhoibyid/:id', function(req, res, next) {
+    res.locals.connection.query("SELECT * FROM `cauhoi` WHERE MaPKS ='"+ req.params.id+ "'", function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ // VALUES ([value-1],[value-2],[value-3])
+ router.post('/themthongtindienkhatsat', function(req, res, next) {
+    var sql = "INSERT INTO `thongtindienkhatsat`( `MaPKQKS`, `MaCauHoi`, `CauTraLoi`) VALUES ('"+req.body.MaPKQKS+"','"+req.body.MaCauHoi+"','"+req.body.CauTraLoi+"')";
+   res.locals.connection.query(sql, function (error, results, fields) {
+       if (error) throw error;
+       res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+   });
+});
+ router.get('/getphieukhaosat/', function(req, res, next) {
+    res.locals.connection.query('SELECT * FROM `phieukhaosat`', function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+router.post('/themphieuketquakhaosat', function(req, res, next) {
+    var sql = "INSERT INTO `phieuketquakhaosat`( `ThoiGianNopKS`, `MaPKS`) VALUES (NOW(),'"+req.body.MaPKS+"')";
+   res.locals.connection.query(sql, function (error, results, fields) {
+       if (error) throw error;
+       res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+   });
+});
+router.get('/getoption/:id', function(req, res, next) {
+    res.locals.connection.query("SELECT * FROM `_option` WHERE MaCH='"+ req.params.id+ "'", function (error, results, fields) {
+        //if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/getoptions/', function(req, res, next) {
+    res.locals.connection.query("SELECT * FROM `_option`", function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+
+//thong ke 
+router.get('/thongsosvdalamviec/', function(req, res, next) {
+    res.locals.connection.query("SELECT COUNT(id) AS TongSo  FROM `thongtindienkhatsat` WHERE MaCauHoi = 6 AND CauTraLoi = 'Đã có việc làm'", function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/svlamtainhanuoc/', function(req, res, next) {
+    res.locals.connection.query("SELECT COUNT(id) AS TongSo   FROM `thongtindienkhatsat` WHERE MaCauHoi = 7 AND CauTraLoi = 'Khu vực nhà nước'", function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/svlmtunhan/', function(req, res, next) {
+    res.locals.connection.query("SELECT COUNT(id) AS TongSo  FROM `thongtindienkhatsat` WHERE MaCauHoi = 7 AND CauTraLoi = 'Khu vực tư nhân'", function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/svlmnuocngoai/', function(req, res, next) {
+    res.locals.connection.query("SELECT COUNT(id) AS TongSo  FROM `thongtindienkhatsat` WHERE MaCauHoi = 7 AND CauTraLoi = 'Liên doanh nước ngoài'", function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/svtutaoviec/', function(req, res, next) {
+    res.locals.connection.query("SELECT COUNT(id) AS TongSo  FROM `thongtindienkhatsat` WHERE MaCauHoi = 7 AND CauTraLoi = 'Tự tạo việc làm'", function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+
+ router.get('/thongkekucvucvieclamsv/', function(req, res, next) {
+    res.locals.connection.query("SELECT COUNT(id) AS TongSo  FROM `thongtindienkhatsat` WHERE MaCauHoi = 6 AND CauTraLoi = 'Đã có việc làm' UNION ALL SELECT COUNT(id) AS TongSo   FROM `thongtindienkhatsat` WHERE MaCauHoi = 7 AND CauTraLoi = 'Khu vực nhà nước' UNION ALL SELECT COUNT(id) AS TongSo  FROM `thongtindienkhatsat` WHERE MaCauHoi = 7 AND CauTraLoi = 'Khu vực tư nhân' UNION ALL SELECT COUNT(id) AS TongSo  FROM `thongtindienkhatsat` WHERE MaCauHoi = 7 AND CauTraLoi = 'Liên doanh nước ngoài' UNION ALL SELECT COUNT(id) AS TongSo  FROM `thongtindienkhatsat` WHERE MaCauHoi = 7 AND CauTraLoi = 'Tự tạo việc làm' ", function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/thoneketinhtrangvieclamsv/', function(req, res, next) {
+    res.locals.connection.query("SELECT COUNT(MaPKQKS) AS TongSo FROM `phieuketquakhaosat` UNION ALL SELECT COUNT(id)FROM `thongtindienkhatsat` WHERE MaCauHoi = 6 AND CauTraLoi = 'Đã có việc làm'   UNION ALL SELECT COUNT(id)FROM `thongtindienkhatsat` WHERE MaCauHoi = 6 AND CauTraLoi = 'Chưa có việc làm' UNION ALL SELECT COUNT(id)FROM `thongtindienkhatsat` WHERE MaCauHoi = 6 AND CauTraLoi = 'Học lên'", function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/thonekelamdungnganh/', function(req, res, next) {
+    res.locals.connection.query("SELECT COUNT(id) AS TongSo FROM `thongtindienkhatsat` WHERE MaCauHoi = 6 AND CauTraLoi = 'Đã có việc làm' UNION ALL SELECT COUNT(id)FROM `thongtindienkhatsat` WHERE  MaCauHoi = 8 AND CauTraLoi = 'Đúng ngành' UNION ALL SELECT COUNT(id) FROM `thongtindienkhatsat` WHERE MaCauHoi = 8 AND CauTraLoi = 'Không đúng ngành'", function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/thonekemucluong/', function(req, res, next) {
+    res.locals.connection.query("SELECT COUNT(id) AS TongSo FROM `thongtindienkhatsat` WHERE MaCauHoi = 6 AND CauTraLoi = 'Đã có việc làm' UNION ALL SELECT COUNT(id)FROM `thongtindienkhatsat` WHERE MaCauHoi = 9 AND CauTraLoi = 'Dưới 5 triệu' UNION ALL SELECT COUNT(id) FROM `thongtindienkhatsat` WHERE MaCauHoi = 9 AND CauTraLoi = 'Từ 5 đến 10 triệu' UNION ALL SELECT COUNT(id)FROM `thongtindienkhatsat` WHERE MaCauHoi = 9 AND CauTraLoi = 'Trên 10 triệu'", function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
+ router.get('/thonekethoigiancoviec/', function(req, res, next) {
+    res.locals.connection.query("SELECT COUNT(id) AS TongSo FROM `thongtindienkhatsat` WHERE MaCauHoi = 6 AND CauTraLoi = 'Đã có việc làm' UNION ALL SELECT COUNT(id)FROM `thongtindienkhatsat` WHERE MaCauHoi = 10 AND CauTraLoi = 'Dưới 3 tháng' UNION ALL SELECT COUNT(id) FROM `thongtindienkhatsat`WHERE MaCauHoi = 10 AND CauTraLoi = 'Từ 3 đến 6 tháng' UNION ALL SELECT COUNT(id)FROM `thongtindienkhatsat` WHERE MaCauHoi = 10 AND CauTraLoi = 'Từ 6 tháng đến 1 năm' UNION ALL SELECT COUNT(id)FROM `thongtindienkhatsat` WHERE MaCauHoi = 10 AND CauTraLoi = 'Trên 1 năm'", function (error, results, fields) {
+        if (error) throw error;
+        res.send(JSON.stringify({"status": 200 ,"error": null, "response": results}));
+    });
+ });
  module.exports = router; // for fix error Router.use() requires a middleware function but got a Object

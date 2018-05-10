@@ -238,4 +238,61 @@ export class QluserService {
     "text" : text};
     return this.http.post(this.rootUrl + '/api/sendemail',data).map(res=>res.json().response);
   }
+  getKetQuaKhaoSat(){
+    return this.http.get(this.rootUrl + '/api/getketquakhaosat/').map(res=>res.json().response);
+  }
+  getCauHoiById(MaPKS:any){
+    return this.http.get(this.rootUrl + '/api/getcauhoibyid/'+MaPKS).map(res=>res.json().response);
+  }
+  themThongTinDienKhatSat(MaPKQKS:any,MaCauHoi:any,CauTraLoi:string){
+    const data = {"MaPKQKS" : MaPKQKS,
+    "MaCauHoi" : MaCauHoi,
+    "CauTraLoi" : CauTraLoi};
+    return this.http.post(this.rootUrl + '/api/themthongtindienkhatsat',data).map(res=>res.json().response);
+  }
+  themPhieuKQKhaoSat(MaPKS:any){
+    const data = {"MaPKS" : MaPKS};
+    return this.http.post(this.rootUrl + '/api/themphieuketquakhaosat',data).map(res=>res.json().response);
+  }
+  getAllPhieuKhaosat(){
+    return this.http.get(this.rootUrl + '/api/getphieukhaosat/').map(res=>res.json().response);
+  }
+  getOption(MaCH:any){
+    return this.http.get(this.rootUrl + '/api/getoption/' + MaCH).map(res=>res.json().response);
+  }
+  getOptions(){
+    return this.http.get(this.rootUrl + '/api/getoptions/').map(res=>res.json().response);
+  }
+
+
+  thongsosvdalamviec(){
+    return this.http.get(this.rootUrl + '/api/thongsosvdalamviec/').map(res=>res.json().response);
+  }
+  svlamtainhanuoc(){
+    return this.http.get(this.rootUrl + '/api/svlamtainhanuoc/').map(res=>res.json().response);
+  }
+  svlmtunhan(){
+    return this.http.get(this.rootUrl + '/api/svlmtunhan/').map(res=>res.json().response);
+  }
+  svlmnuocngoai(){
+    return this.http.get(this.rootUrl + '/api/svlmnuocngoai/').map(res=>res.json().response);
+  }
+  svtutaoviec(){
+    return this.http.get(this.rootUrl + '/api/svtutaoviec/').map(res=>res.json().response);
+  }
+  thongkekucvucvieclamsv(){
+    return this.http.get(this.rootUrl + '/api/thongkekucvucvieclamsv/').map(res=>res.json().response);
+  }
+  thoneketinhtrangvieclamsv(){
+    return this.http.get(this.rootUrl + '/api/thoneketinhtrangvieclamsv/').map(res=>res.json().response);
+  }
+  thonekelamdungnganh(){
+    return this.http.get(this.rootUrl + '/api/thonekelamdungnganh/').map(res=>res.json().response);
+  }
+  thonekemucluong(){
+    return this.http.get(this.rootUrl + '/api/thonekemucluong/').map(res=>res.json().response);
+  }
+  thonekethoigiancoviec(){
+    return this.http.get(this.rootUrl + '/api/thonekethoigiancoviec/').map(res=>res.json().response);
+  }
 }

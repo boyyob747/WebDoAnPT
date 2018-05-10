@@ -17,7 +17,8 @@ app.use(bodyParser.urlencoded({
     extended : false
 }))
 app.use(function(req, res, next){
-	res.locals.connection = mysql.createConnection({
+	res.locals.connection = mysql.createPool({
+        connectionLimit : 99999,
         host:"localhost",
         user: "root",
         password : "",

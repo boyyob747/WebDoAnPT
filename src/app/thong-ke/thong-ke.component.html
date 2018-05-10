@@ -1,3 +1,109 @@
-<p>
-  thong-ke works!
-</p>
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h3 class="card-title ">THỐNG KÊ</h3>
+                    </div>
+                    <div class="card-body">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                      <mat-select [(ngModel)]="choosethongke" required placeholder="Chọn tiêu chí thống kê" name="choosethongke" class="example-full-width">
+                                          <mat-option  value="0">
+                                                Tình trạng làm việc của sinh viên sau tốt nghiệp
+                                          </mat-option>
+                                          <mat-option  value="1">
+                                                Khu vực làm việc của sinh viên tốt nghiệp
+                                            </mat-option>
+                                            <mat-option  value="2">
+                                                    Tỉ lệ sinh viên làm việc đúng ngành
+                                                </mat-option>
+                                                <mat-option  value="3">
+                                                        Mức lương của sinh viên sau tốt nghiệp
+                                                    </mat-option>
+                                                    <mat-option  value="4">
+                                                            Thời gian có việc của sinh viên sau tốt nghiệp
+                                                        </mat-option>
+                                      </mat-select>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                      <mat-select [(ngModel)]="dang" required placeholder="Chọn cách biểu diễn" name="dang" class="example-full-width">
+                                          <mat-option  value="0">
+                                              Dạng bảng
+                                          </mat-option>
+                                          <mat-option  value="1">
+                                              Dạng biểu đồ
+                                          </mat-option>
+                                      </mat-select>
+                                    </mat-form-field> 
+                              </div>
+                              <div class="col-md-2">
+                                  <mat-form-field class="example-full-width">
+                                      <mat-select [(ngModel)]="nam" required placeholder="Chọn năm" name="nam" class="example-full-width">
+                                          <mat-option  value="2015">
+                                              2015
+                                          </mat-option>
+                                          <mat-option  value="2016">
+                                              2016
+                                          </mat-option>
+                                          <mat-option  value="2017">
+                                              2017
+                                          </mat-option>
+                                          <mat-option  value="2018">
+                                              2018
+                                          </mat-option>
+                                      </mat-select>
+                                    </mat-form-field> 
+                              </div>
+                              <div class="col-md-3">
+                                      <button (click)="xem()" mat-raised-button color="primary">Xem</button>
+                              </div>
+                          </div>
+                          <mat-table [dataSource]="dataSource" *ngIf = "isdang  == '0'">
+                              <ng-container matColumnDef="ID">
+                                  <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+                                    <mat-cell *matCellDef="let thongke">{{thongke.ID}}</mat-cell>
+                              </ng-container>
+                              <ng-container matColumnDef="KhuVucLV">
+                                  <mat-header-cell *matHeaderCellDef>Khu vực làm việc</mat-header-cell>
+                                  <mat-cell *matCellDef="let thongke">{{thongke.KhuVucLV}}</mat-cell>
+                              </ng-container>
+                              <ng-container style="text-align: center;" matColumnDef="SoLuong">
+                                  <mat-header-cell *matHeaderCellDef>Số lượng</mat-header-cell>
+                                  <mat-cell *matCellDef="let thongke">{{thongke.SoLuong}}</mat-cell>
+                              </ng-container>
+                              <ng-container matColumnDef="TiLe">
+                                  <mat-header-cell *matHeaderCellDef>Tỉ lệ</mat-header-cell>
+                                  <mat-cell *matCellDef="let thongke">{{thongke.TiLe}}</mat-cell>
+                              </ng-container>
+                              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                              <mat-row *matRowDef="let row; columns: displayedColumns;">
+                              </mat-row>
+                              
+                          </mat-table>
+                          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" *ngIf = "isdang == '0'"></mat-paginator>
+                          <div class="row" *ngIf ="isdang == '1'" >
+                                <div class="col-md-6">
+                                    <canvas baseChart height="180px" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                                      </canvas>
+                                </div>
+                                <div class="col-md-6">
+                                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                                      </canvas>
+                            </div>
+                            </div>
+                          <div *ngIf="isError" class="alert alert-danger">
+                              <span>
+                                  <b>Vui lòng chọn đủ thông tin!</b></span>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
